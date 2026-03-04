@@ -1,0 +1,109 @@
+:root {
+  /* this has to be set to switch between light or dark */
+  color-scheme: light dark;
+}
+
+html,
+body {
+    font-family: 'Comic Sans', 'Open Sans', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    margin: 0;
+    /* Ugly fix for vertical scrollbar on Chromium Based Browsers */
+    overflow-x: hidden;
+    background: #221b32;
+    background-image: none;
+}
+
+h1 {
+    color: light-dark(#000000, rgb(254,203,230));
+}
+
+footer {
+    color: light-dark(#000000, rgb(254,203,230));
+    text-align: center;
+}
+
+.teal {
+    color: #007f7f;
+}
+
+body {
+    color: light-dark(#000000,rgb(254,203,230));
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 40px;
+}
+
+input,
+button {
+    padding: 10px;
+    font-size: 16px;
+    margin: 6px;
+    border-radius: 8px;
+    border: none;
+}
+
+button {
+    cursor: pointer;
+    background: light-dark(#e1e1e1,#1e1e1e);
+    color: light-dark(#000000,rgb(254,203,230));
+}
+
+button:hover {
+    background: light-dark(#ccc,#333);
+}
+
+#gradient-wrapper {
+    width: 600px;
+    height: 200px;
+    margin: 30px auto;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid light-dark(#000000,rgb(254,203,230));
+}
+
+#gradient {
+    width: 200%;
+    height: 100%;
+    animation: shimmer 8s linear infinite alternate;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.color-box {
+    display: inline-block;
+    width: 160px;
+    height: 50px;
+    margin: 10px;
+    line-height: 50px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+#skin {
+    margin-top: 20px;
+}
+
+#pigment_png {
+    text-decoration: none;
+    color: light-dark(#000000,rgb(254,203,230));
+}
+
+@media (prefers-color-scheme: light) {
+    html,
+    body {
+        background-image: url('https://www.tw25.net/images/website_bg_light.png');
+    }
+}
