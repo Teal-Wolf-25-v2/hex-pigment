@@ -174,7 +174,48 @@ function renderGradient(colors) {
         ).join("");
 }
 
+// ================= Export PNG =================
+function exportPNG(){
+    const colorElements = document.querySelectorAll(".color-box");
+    if (!colorElements.length) return;
 
+    const colors = Array.from(colorElements).map(el =>
+        el.textContent.trim()
+    );
+
+    const canvas = document.createElement("canvas");
+    const width = 1600;
+    const height = 600;
+    canvas.width = width;
+    canvas.height = height;
+
+    const ctx = canvas.getContext("2d");
+    const gradient = ctx.createLinearGradient(0, 0, width, 0);
+
+    colors.forEach((color, i) => {
+        gradient.addColorStop(
+            i / (colors.length - 1),
+            color
+        );
+    });
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, width, height);
+
+    const vignette = ctx.createRadialGradient(
+        width/2, height/2, height/4,
+        width/2, height/2, width/1.2
+    );
+    vignette.addColorStop(0, "rgba(0,0,0,0)");
+    vignette.addColorStop(1, "rgba(0,0,0,0.25)");
+    ctx.fillStyle = vignette;
+    ctx.fillRect(0,0,width,height);
+
+    const link = document.createElement("a");
+    link.download = "pigment.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+}
 
 // ================= Main =================
 async function generatePigment(){
