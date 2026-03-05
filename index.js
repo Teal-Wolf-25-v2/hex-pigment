@@ -225,7 +225,7 @@ async function generatePigment(){
     let input=document.getElementById("userInput").value.trim();
     if(!input) return;
 
-    history.pushState({}, "", "/pigment/"+encodeURIComponent(input));
+    history.pushState({}, "", "/"+encodeURIComponent(input));
 
     let uuid=input;
     let username=input;
