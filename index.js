@@ -146,11 +146,14 @@ function copyLink() {
 }
 
 // ================= URL Handling =================
-function getPathUser() {
+function getPathUser(){
     const path = window.location.pathname;
-    if (path.startsWith("/pigment/")) {
-        return decodeURIComponent(path.replace("/pigment/", ""));
+
+    // Remove leading slash
+    if (path.length > 1) {
+        return decodeURIComponent(path.substring(1));
     }
+
     return null;
 }
 
