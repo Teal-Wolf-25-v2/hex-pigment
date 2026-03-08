@@ -87,7 +87,7 @@ function getDefaultPigment(uuid){
 async function getVipPigment(uuid) {
     try {
         const res = await fetch(
-            "https://raw.githubusercontent.com/Teal-Wolf-25-v2/contributors/main/paucal/contributors-v01.json5"
+            "https://raw.githubusercontent.com/gamma-delta/contributors/refs/heads/main/paucal/contributors-v01.json5"
         );
 
         const text = await res.text();
