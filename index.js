@@ -118,14 +118,19 @@ async function getVipPigment(uuid) {
 
 // ================= Username → UUID =================
 async function usernameToUUID(username) {
-    const res = await fetch(
+    let res = await fetch(
         `https://proxy.corsfix.com/?` + `https://api.mojang.com/users/profiles/minecraft/${username}`, {
         headers: {
             "x-corsfix-cache": "60m",
         },
     }
     );
-    if (!res.ok) return null;
+    if (!res.ok) {
+        let res = await fetch(
+            `https://corsproxy.io/?url=` + `https://api.mojang.com/users/profiles/minecraft/${username}`
+        );
+        if (!res.ok) return null;
+    };
     const data = await res.json();
     return data.id.replace(
         /(.{8})(.{4})(.{4})(.{4})(.{12})/,
