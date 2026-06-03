@@ -1,4 +1,4 @@
-// ================= JavaRandom =================
+// JavaRandom
 class JavaRandom {
     constructor(seed) {
         this.multiplier = 0x5DEECE66Dn;
@@ -14,7 +14,7 @@ class JavaRandom {
     nextFloatRange(l, h) { return l + (h - l) * this.nextFloat(); }
 }
 
-// ================= Helpers =================
+// Helpers
 function uuidToBigInt(uuid) {
     return BigInt("0x" + uuid.replace(/-/g, ""));
 }
@@ -48,7 +48,7 @@ function decToHex(dec) {
     return "#" + dec.toString(16).padStart(6, "0").toUpperCase();
 }
 
-// ================= Contrast Helper =================
+// Contrast Helper
 function getContrastTextColor(hex) {
     hex = hex.replace("#", "");
     const r = parseInt(hex.substring(0,2),16);
@@ -60,7 +60,7 @@ function getContrastTextColor(hex) {
     return luminance > 0.6 ? "#000000" : "rgb(254,203,230)";
 }
 
-// ================= Default Pigment =================
+// Default Pigment
 function getDefaultPigment(uuid){
     const big=uuidToBigInt(uuid);
     const msb=big>>64n;
@@ -83,7 +83,7 @@ function getDefaultPigment(uuid){
     ];
 }
 
-// ================= Fetch VIP Pigment =================
+// Fetch VIP Pigment
 async function getVipPigment(uuid) {
     try {
         const res = await fetch(
@@ -100,7 +100,6 @@ async function getVipPigment(uuid) {
                 const entry = data[key];
 
                 if (entry["hexcasting:colorizer"]) {
-                    // Convert decimal values like 0xe64539 to "#E64539"
                     return entry["hexcasting:colorizer"].map(num => {
                         return decToHex(Number(num));
                     });
@@ -116,7 +115,7 @@ async function getVipPigment(uuid) {
 }
 
 
-// ================= Username → UUID =================
+// Username → UUID
 async function usernameToUUID(username) {
     let res = await fetch(
         `https://corsjangapi.b-cdn.net/users/profiles/minecraft/${username}`
@@ -129,19 +128,19 @@ async function usernameToUUID(username) {
     );
 }
 
-// ================= Skin =================
+// Skin
 function showSkin(username) {
     document.getElementById("skin").innerHTML =
         `<img src="https://vzge.me/full/150/${username}" alt="Minecraft Skin">`;
 }
 
-// ================= Share =================
+// Share
 function copyLink() {
     navigator.clipboard.writeText(window.location.href);
     alert("Link copied!");
 }
 
-// ================= URL Handling =================
+// URL Handling
 function getPathUser(){
     const path = window.location.pathname;
 
@@ -153,7 +152,7 @@ function getPathUser(){
     return null;
 }
 
-// ================= Gradient Renderer =================
+// Gradient Renderer
 function renderGradient(colors) {
     const gradientDiv = document.getElementById("gradient");
 
@@ -173,7 +172,7 @@ function renderGradient(colors) {
         ).join("");
 }
 
-// ================= Export PNG =================
+// Export PNG
 function exportPNG(){
     const colorElements = document.querySelectorAll(".color-box");
     if (!colorElements.length) return;
@@ -216,7 +215,7 @@ function exportPNG(){
     link.click();
 }
 
-// ================= Main =================
+// Main
 async function generatePigment(){
     let input=document.getElementById("userInput").value.trim();
     if(!input) return;
