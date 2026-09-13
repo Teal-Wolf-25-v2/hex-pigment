@@ -129,9 +129,9 @@ async function usernameToUUID(username) {
 }
 
 // Skin
-function showSkin(username) {
+function showSkin(uuid) {
     document.getElementById("skin").innerHTML =
-        `<img src="https://vzge.me/full/150/${username}" alt="Minecraft Skin">`;
+        `<img src="https://vzge.me/full/150/${uuid}" alt="Minecraft Skin">`;
 }
 
 // Share
@@ -250,7 +250,6 @@ async function generatePigment(){
     history.pushState({}, "", "/" + encodeURIComponent(input));
 
     let uuid=input;
-    let username=input;
 
     if(!isUUID(input)){
         uuid=await usernameToUUID(input);
@@ -264,7 +263,7 @@ async function generatePigment(){
     }
 
     renderGradient(colors);
-    showSkin(username);
+    showSkin(uuid);
 }
 
 
