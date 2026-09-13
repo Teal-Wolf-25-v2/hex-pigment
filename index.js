@@ -129,9 +129,9 @@ async function usernameToUUID(username) {
 }
 
 // Skin
-function showSkin(username) {
+function showSkin(uuid) {
     document.getElementById("skin").innerHTML =
-        `<img src="https://vzge.me/full/150/${username}" alt="Minecraft Skin">`;
+        `<img src="https://vzge.me/full/150/${uuid}" alt="Minecraft Skin">`;
 }
 
 // Share
@@ -172,10 +172,10 @@ function renderGradient(colors) {
         ).join("");
 }
 
-// Export PNG
-function exportPNG(){
+// Build gradient canvas (shared by download/copy)
+function buildGradientCanvas(){
     const colorElements = document.querySelectorAll(".color-box");
-    if (!colorElements.length) return;
+    if (!colorElements.length) return null;
 
     const colors = Array.from(colorElements).map(el =>
         el.textContent.trim()
@@ -209,10 +209,37 @@ function exportPNG(){
     ctx.fillStyle = vignette;
     ctx.fillRect(0,0,width,height);
 
+    return canvas;
+}
+
+// Download PNG
+function downloadPNG(){
+    const canvas = buildGradientCanvas();
+    if (!canvas) return;
+
     const link = document.createElement("a");
     link.download = "pigment.png";
     link.href = canvas.toDataURL("image/png");
     link.click();
+}
+
+// Copy PNG
+function copyPNG(){
+    const canvas = buildGradientCanvas();
+    if (!canvas) return;
+
+    const item = new ClipboardItem({
+        "image/png": new Promise((resolve, reject) => {
+            canvas.toBlob(blob => {
+                if (blob) resolve(blob);
+                else reject(new Error("toBlob failed"));
+            }, "image/png");
+        })
+    });
+
+    navigator.clipboard.write([item])
+        .then(() => alert("Copied!"))
+        .catch(err => console.error("Copy failed:", err));
 }
 
 // Main
@@ -223,7 +250,6 @@ async function generatePigment(){
     history.pushState({}, "", "/" + encodeURIComponent(input));
 
     let uuid=input;
-    let username=input;
 
     if(!isUUID(input)){
         uuid=await usernameToUUID(input);
@@ -237,7 +263,7 @@ async function generatePigment(){
     }
 
     renderGradient(colors);
-    showSkin(username);
+    showSkin(uuid);
 }
 
 
