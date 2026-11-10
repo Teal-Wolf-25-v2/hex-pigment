@@ -5,6 +5,8 @@
 
 html,
 body {
+    --slate: #221b32;
+    --amethyst: rgb(254,203,230);
     font-family: 'Comic Sans', 'Open Sans', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
     background-repeat: no-repeat;
     background-size: cover;
@@ -13,12 +15,12 @@ body {
     margin: 0;
     /* Ugly fix for vertical scrollbar on Chromium Based Browsers */
     overflow-x: hidden;
-    background: #221b32;
+    background: light-dark(#e1e1e1,var(--slate));
     background-image: none;
 }
 
 h1 {
-    color: light-dark(#000000, rgb(254,203,230));
+    color: light-dark(#000000, var(--amethyst));
 }
 
 footer {
@@ -31,7 +33,7 @@ footer {
 }
 
 body {
-    color: light-dark(#000000,rgb(254,203,230));
+    color: light-dark(#000000,var(--amethyst));
     font-family: Arial, sans-serif;
     text-align: center;
     padding: 40px;
@@ -48,12 +50,12 @@ button {
 
 button {
     cursor: pointer;
-    background: light-dark(#e1e1e1,#1e1e1e);
-    color: light-dark(#000000,rgb(254,203,230));
+    background: light-dark(var(--amethyst),#1e1e1e);
+    color: light-dark(#000000,var(--amethyst));
 }
 
 button:hover {
-    background: light-dark(#ccc,#333);
+    background: light-dark(var(--amethyst),#333);
 }
 
 #gradient-wrapper {
@@ -63,7 +65,7 @@ button:hover {
     border-radius: 16px;
     overflow: hidden;
     position: relative;
-    border: 2px solid light-dark(#000000,rgb(254,203,230));
+    border: 2px solid light-dark(#000000,var(--amethyst));
 }
 
 #gradient {
@@ -98,7 +100,7 @@ button:hover {
 
 #pigment_png {
     text-decoration: none;
-    color: light-dark(#000000,rgb(254,203,230));
+    color: light-dark(#000000,var(--amethyst));
 }
 
 @media (prefers-color-scheme: light) {
