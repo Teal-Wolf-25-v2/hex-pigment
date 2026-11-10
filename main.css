@@ -45,7 +45,7 @@ button {
     font-size: 16px;
     margin: 6px;
     border-radius: 8px;
-    border: none;
+    border: solid light-dark(#000000, var(--amethyst));
 }
 
 button {
